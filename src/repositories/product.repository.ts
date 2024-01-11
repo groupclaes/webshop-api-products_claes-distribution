@@ -2,7 +2,7 @@ import sql from 'mssql'
 import { FastifyBaseLogger } from 'fastify'
 
 export default class Product {
-  schema: string = '[product].'
+  schema: string = 'product.'
   _logger: FastifyBaseLogger
   _pool: sql.ConnectionPool
 
@@ -17,7 +17,7 @@ export default class Product {
     r.input('user_id', sql.VarChar, user_id)
     r.input('usercode', sql.Int, usercode)
     r.input('culture', sql.VarChar, culture)
-    const result = await r.execute(this.schema + '[usp_get]')
+    const result = await r.execute(this.schema + 'usp_get')
 
     if (result.recordset.length > 0) {
       return result.recordset[0]
@@ -30,7 +30,7 @@ export default class Product {
     r.input('id', sql.Int, id)
     r.input('usercode', sql.Int, usercode)
     r.input('culture', sql.VarChar, culture)
-    const result = await r.execute(this.schema + '[usp_getBase]')
+    const result = await r.execute(this.schema + 'usp_getBase')
 
     if (result.recordset.length > 0) {
       return result.recordset[0]
@@ -55,7 +55,7 @@ export default class Product {
     r.input('customer_id', sql.Int, customer_id)
     r.input('address_id', sql.Int, address_id)
     r.input('mode', sql.Bit, mode)
-    const result = await r.execute(this.schema + '[usp_putFavorite]')
+    const result = await r.execute(this.schema + 'usp_putFavorite')
 
     if (result.rowsAffected.length > 0) {
       return result.rowsAffected[0] > 0
@@ -69,7 +69,7 @@ export default class Product {
     r.input('customer_id', sql.Int, customer_id)
     r.input('address_id', sql.Int, address_id)
     r.input('description', sql.VarChar, description)
-    const result = await r.execute(this.schema + '[usp_putDescription]')
+    const result = await r.execute(this.schema + 'usp_putDescription')
 
     if (result.rowsAffected.length > 0) {
       return result.rowsAffected[0] > 0
@@ -82,7 +82,7 @@ export default class Product {
     r.input('product_id', sql.Int, id)
     r.input('customer_id', sql.Int, customer_id)
     r.input('address_id', sql.Int, address_id)
-    const result = await r.execute(this.schema + '[usp_deleteDescription]')
+    const result = await r.execute(this.schema + 'usp_deleteDescription')
 
     if (result.rowsAffected.length > 0) {
       return result.rowsAffected[0] > 0
